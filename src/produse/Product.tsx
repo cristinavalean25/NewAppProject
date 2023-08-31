@@ -25,16 +25,16 @@ const Product = ({product}: ProductComponentProps) => {
     navigation.navigate('ProductPage', {product: product});
   };
 
-  const handleDeleteProduct = async (productId: any) => {
-    try {
-      const response = await axios.delete(
-        `http://192.168.1.10:4000/products/${productId}`,
-      );
-      console.log('Product deleted:', response.data);
-    } catch (error) {
-      console.error('Error deleting product:', error);
-    }
-  };
+  // const handleDeleteProduct = async (productId: any) => {
+  //   try {
+  //     const response = await axios.delete(
+  //       `http://192.168.2.120:4000/products/${productId}`,
+  //     );
+  //     console.log('Product deleted:', response.data);
+  //   } catch (error) {
+  //     console.error('Error deleting product:', error);
+  //   }
+  // };
 
   return (
     <SafeAreaView>
@@ -52,10 +52,10 @@ const Product = ({product}: ProductComponentProps) => {
               Category: {product.category}
             </Text>
             <Text style={styles.productDetail}>Brand: {product.brand}</Text>
-            <Button
+            {/* <Button
               title="Delete"
               onPress={() => handleDeleteProduct(product.id)}
-            />
+            /> */}
 
             <Text style={styles.viewDetailsButton}>View Details</Text>
           </TouchableOpacity>

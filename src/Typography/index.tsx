@@ -5,6 +5,12 @@ interface ITypography {
   children: React.ReactNode;
   mode: 'extrasmall' | 'small' | 'large' | 'medium';
   align?: 'left' | 'center' | 'right';
+  justifyContent?:
+    | 'flex-start'
+    | 'center'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around';
   styles?: TextStyle;
   color?: ColorValue;
   fontWeight?: 'normal' | 'bold' | '500' | '600' | '700' | '800' | '900';
@@ -17,6 +23,7 @@ const Typography = ({
   mode,
   styles: otherStyles,
   align,
+  justifyContent,
   color,
   fontWeight,
   margin,
@@ -29,6 +36,7 @@ const Typography = ({
         ...styles[mode],
         ...otherStyles,
         textAlign: align,
+        justifyContent,
         color,
         fontWeight,
         margin,
@@ -42,6 +50,7 @@ const Typography = ({
 Typography.defaultProps = {
   mode: 'medium',
   align: 'left',
+  justifyContent: 'center',
   color: '#000',
   fontWeight: 'normal',
   margin: 0,

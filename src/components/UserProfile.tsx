@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TextInput,
+  TouchableHighlight,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Navbar from './Navbar';
@@ -17,10 +18,10 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {logout} from '../redux/AuthSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {useShoppingCart} from '../ShoppingCart';
-
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {RootState} from '../redux/store';
 import {ProductProps} from '../types/ProductProps';
+import Modal from 'react-native-modal';
 
 export type UserProfileProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -29,6 +30,8 @@ export type UserProfileProps = {
 const UserProfile = ({navigation}: UserProfileProps) => {
   const {userCart, handleRemoveItem} = useShoppingCart();
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
+  const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const backgroundStyle = {
     backgroundColor: '#fff',
@@ -42,7 +45,6 @@ const UserProfile = ({navigation}: UserProfileProps) => {
     profession: 'Web Developer',
     avatar: require('../Images/screen-0.webp'),
   };
-  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     try {
@@ -59,8 +61,8 @@ const UserProfile = ({navigation}: UserProfileProps) => {
     navigation.navigate('ProductPage', {product});
   };
 
-  const handlePlaceOrder = () => {
-    navigation.navigate('Register');
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
   };
 
   return (
@@ -118,43 +120,50 @@ const UserProfile = ({navigation}: UserProfileProps) => {
                     </View>
                   </TouchableOpacity>
                 ))}
+                <View style={styles.container}>
+                  <TouchableHighlight
+                    onPress={toggleModal}
+                    style={styles.placeOrderButton}>
+                    <Typography mode="small" color="#fff">
+                      Plaseaza comanda
+                    </Typography>
+                  </TouchableHighlight>
+
+                  <Modal isVisible={modalVisible}>
+                    <View style={styles.modalContainer}>
+                      <View style={styles.modalContent}>
+                        <TextInput
+                          style={styles.inputField}
+                          placeholder="Nume"
+                        />
+                        <TextInput
+                          style={styles.inputField}
+                          placeholder="Prenume"
+                        />
+                        <TextInput
+                          style={styles.inputField}
+                          placeholder="Adresă"
+                        />
+                        <TextInput
+                          style={styles.inputField}
+                          placeholder="Oraș"
+                        />
+                        <TouchableHighlight
+                          onPress={toggleModal}
+                          style={styles.placeOrderButton}>
+                          <Typography mode="small" align="center" color="#fff">
+                            Salveaza datele
+                          </Typography>
+                        </TouchableHighlight>
+                      </View>
+                    </View>
+                  </Modal>
+                </View>
               </View>
             )}
-
-            <View style={styles.detailsContainer}>
-              <View style={styles.detailItem}>
-                <View style={styles.iconContainer}>
-                  <Icon name="user" size={30} color="#E839F6" />
-                </View>
-                <Typography>My Profile</Typography>
-              </View>
-              <View style={styles.detailItem}>
-                <View style={styles.iconContainer}>
-                  <Icon name="comments" size={30} color="#E839F6" />
-                </View>
-                <Typography styles={styles.detailText}>Messages</Typography>
-              </View>
-              <View style={styles.detailItem}>
-                <View style={styles.iconContainer}>
-                  <Icon name="heart" size={30} color="#E839F6" />
-                </View>
-                <Typography styles={styles.detailText}>Favorites</Typography>
-              </View>
-              <View style={styles.detailItem}>
-                <View style={styles.iconContainer}>
-                  <Icon name="map-marker" size={30} color="#E839F6" />
-                </View>
-                <Typography styles={styles.detailText}>Location</Typography>
-              </View>
-              <View style={styles.detailItem}>
-                <View style={styles.iconContainer}>
-                  <Icon name="cog" size={30} color="#E839F6" />
-                </View>
-                <Typography styles={styles.detailText}>Settings</Typography>
-              </View>
-            </View>
           </View>
         </ScrollView>
+        <View style={styles.emptyContainer}></View>
       </SafeAreaView>
       <View style={styles.logoutContainer}>
         <View style={styles.lineBottom}>
@@ -293,15 +302,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 5,
   },
+
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '80%',
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
   placeOrderButton: {
-    backgroundColor: '#5cb85c',
-    color: '#fff',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: '#E839F6',
+    textAlign: 'center',
+    padding: 10,
     borderRadius: 5,
-    marginTop: 10,
-    margin: 5,
-    alignSelf: 'center',
+    marginTop: 20,
+  },
+  inputField: {
+    borderColor: '#E839F6',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 10,
+    padding: 10,
+  },
+
+  emptyContainer: {
+    height: 50,
+    backgroundColor: '#fff',
   },
 });
 

@@ -22,7 +22,7 @@ const CategoryMenu = ({navigation}: CategoryProps) => {
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch('http://192.168.1.10:4000/category')
+    fetch('http://192.168.2.120:4000/category')
       .then(response => response.json())
       .then((data: string[]) => {
         setCategories(data);

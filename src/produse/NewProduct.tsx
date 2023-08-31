@@ -14,7 +14,7 @@ function NewProduct() {
 
   const addProduct = async () => {
     try {
-      const response = await axios.post('http://192.168.1.10:4000/products', {
+      const response = await axios.post('http://192.168.2.120:4000/products', {
         title: productTitle,
         price: parseFloat(productPrice),
         image: productImage,

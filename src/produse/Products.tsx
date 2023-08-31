@@ -10,7 +10,7 @@ function Products() {
   useEffect(() => {
     axios
       // .get('http://192.168.2.120:3000/products')
-      .get('http://192.168.1.10:4000/products')
+      .get('http://192.168.2.120:4000/products')
       .then(res => {
         if (Array.isArray(res.data)) {
           console.log('Received products:', res.data);

@@ -14,9 +14,11 @@ import Navbar from './Navbar';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useShoppingCart} from '../ShoppingCart';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import Typography from '../Typography';
 
 type CategoryPageProps = {
   route: RouteProp<RootStackParamList, 'CategoryPage'>;
+  Home: {category: string};
 };
 
 const CategoryPage = ({route}: CategoryPageProps) => {
@@ -27,7 +29,7 @@ const CategoryPage = ({route}: CategoryPageProps) => {
 
   useEffect(() => {
     console.log('Category selected:', category);
-    const categoryUrl = `http://192.168.1.10:4000/products?category=${category}`;
+    const categoryUrl = `http://192.168.2.120:4000/products?category=${category}`;
 
     fetch(categoryUrl)
       .then(response => response.json())
@@ -52,7 +54,14 @@ const CategoryPage = ({route}: CategoryPageProps) => {
       <SafeAreaView style={{flex: 1}}>
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View style={styles.container}>
-            <Text style={styles.categoryTitle}>{category.toUpperCase()}</Text>
+            <Typography
+              mode="large"
+              align="center"
+              fontWeight="800"
+              color="#E839F6"
+              justifyContent="center">
+              {category.toUpperCase()}
+            </Typography>
             {products.map(
               product =>
                 product.category === category && (

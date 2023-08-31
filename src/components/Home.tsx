@@ -6,6 +6,7 @@ import Products from '../produse/Products';
 import NewProduct from '../produse/NewProduct';
 import CategoryMenu from './CategoryMenu';
 import Slider from './Slider';
+import NewArivals from './NewArivals';
 
 export type HomeProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -25,6 +26,7 @@ function Home({navigation}: HomeProps) {
           <Navbar navigation={navigation} />
           <Slider />
           <CategoryMenu navigation={navigation} />
+          <NewArivals />
           {/* <NewProduct /> */}
           <Products />
         </ScrollView>
