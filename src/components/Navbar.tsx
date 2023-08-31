@@ -103,8 +103,10 @@ function Navbar({navigation}: NavbarProps) {
                 color="#000"
                 style={styles.icon}
               />
-              <Typography mode="extrasmall">{cart.length}</Typography>
             </TouchableOpacity>
+            <Typography mode="extrasmall" margin={5} fontWeight="600">
+              {cart.length}
+            </Typography>
           </View>
         </View>
       </View>
@@ -132,6 +134,7 @@ const styles = StyleSheet.create({
   menuText: {
     marginRight: 10,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   icon: {
     fontSize: 20,
