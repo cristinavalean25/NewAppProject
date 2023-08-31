@@ -39,7 +39,9 @@ const CategoryMenu = ({navigation}: CategoryProps) => {
               <TouchableOpacity
                 onPress={() => redirectToCategory(category)}
                 style={styles.category}>
-                <Typography mode="small">{category.toUpperCase()}</Typography>
+                <Typography mode="extrasmall">
+                  {category.toUpperCase()}
+                </Typography>
               </TouchableOpacity>
             </View>
           ))}

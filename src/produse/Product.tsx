@@ -13,6 +13,7 @@ import {SafeAreaView} from 'react-native';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {ProductPageNavigationProp} from './ProductPage';
+import Typography from '../Typography';
 
 interface ProductComponentProps {
   product: ProductProps;
